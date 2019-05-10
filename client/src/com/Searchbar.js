@@ -18,7 +18,7 @@ class Searchbar extends Component {
                          <li className='nav-app-logo'></li>
                          <li className='nav-search-tab'>
                               <form className='nav-search'>
-                                   <input
+                                   <input className='search-bar'
                                         id='searchText'
                                         ref={input => this.search = input}
                                         onChange={this.handleInputChange}
@@ -26,8 +26,10 @@ class Searchbar extends Component {
                                         name='searchtext'
                                         placeholder='What do you want to fix?'>
                                    </input>
+                                   <button>Filter</button>
 
                                    <button>Search</button>
+
 
                               </form>
                          </li>

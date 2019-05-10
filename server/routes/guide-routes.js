@@ -35,9 +35,11 @@ router.put('/guides/:id', (req, res) => {
           res.status(400).json({ message: 'Specified id is not valid' });
           return;
      }
-     Guide.findByIdAndUpdate(req.params.id, req.body)
-          .then(() => {
-               res.json({ message: `Guide ${req.params.id} updated successfully.` })
+     Guide.findByIdAndUpdate(req.params.id, req.body, { new: true })
+          .then((updatedGuide) => {
+               res.json({
+                    guide: updatedGuide
+               })
           })
           .catch(err => {
                res.json(err);
@@ -49,6 +51,9 @@ router.post('/guides', (req, res) => {
      Guide.create({
           title: req.body.title,
           description: req.body.description,
+          material: req.body.material,
+          time: req.body.time,
+          tags: req.body.tags
           // steps: []
      })
           .then(response => {
@@ -62,13 +67,16 @@ router.post('/guides', (req, res) => {
 
 //delete guide
 router.delete('/guides/:id', (req, res) => {
-     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-          res.status(400).json({ message: 'No guide by this iD..' })
-          return
-     }
+     // if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+     //      res.status(400).json({ message: 'No guide by this iD..' })
+     //      return
+     // }
      Guide.findByIdAndRemove(req.params.id)
-          .then(() => {
-               res.json({ message: `Guide ${req.params.id} deleted!` })
+          .then((response) => {
+               res.json({
+                    response,
+                    message: `Guide ${req.params.id} deleted!`
+               })
           })
 })
 

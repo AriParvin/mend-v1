@@ -38,14 +38,27 @@ const getGuide = (id) => {
           .get(`/guides/${id}`)
           .then(response => response.data)
 }
+const deleteGuide = (id) => {
+
+     return service
+          .delete(`/guides/${id}`)
+          .then(response => response.data)
+}
 
 const addGuide = (data) => {
      return service
-          .post('/guides', { data })
+          .post('/guides', data)
+          .then(response => response.data)
+}
+
+
+const editGuide = (id, data) => {
+     return service
+          .put(`/guides/${id}`, data)
           .then(response => response.data)
 }
 
 
 
 
-export { signup, login, logout, loggedin, addGuide, getGuides, getGuide };
+export { signup, login, logout, loggedin, addGuide, getGuides, getGuide, deleteGuide, editGuide };

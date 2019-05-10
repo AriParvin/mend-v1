@@ -1,8 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 import EditGuide from "./Edit";
 import axios from "axios";
 import { getGuide } from '../../service/api'
+import { deleteGuide } from '../../service/api'
+import AddStep from '../Steps/Add'
 
 class GuideDetails extends React.Component {
      state = {
@@ -19,12 +21,14 @@ class GuideDetails extends React.Component {
                });
      };
 
-     deleteGuide = () => {
+     removeGuide = () => {
           const id = this.props.match.params.id;
 
-          axios.delete(`http://localhost:5000/api/guides/${id}`).then(response => {
+          deleteGuide(id).then(res => {
                // redirects to /guides
-               this.props.history.push("/guides");
+               console.log(res)
+               this.props.history.push("/");
+
           });
      };
 
@@ -44,40 +48,48 @@ class GuideDetails extends React.Component {
                editBlock = (
                     <div>
                          {/* <EditProject guide={guide} getDetails={this.getProject} /> */}
-                         <button
+                         {/* <button
                               style={{ marginTop: "10px" }}
                               className="btn btn-danger"
-                              onClick={this.deleteProject}
+                              onClick={this.removeGuide}
                          >
                               Delete guide
-          </button>
+          </button> */}
                     </div>
                );
           }
           console.log(this.state.guide)
           return (
+
                <div>
-                    <h1>{guide.title}</h1>
-                    <p>{guide.description}</p>
-                    <p>{guide.time}</p>
-                    <p>{guide.rating}</p>
+                    {guide && <div> <h1>{guide.title}</h1>
+                         <p>{guide.description}</p>
+                         <p>{guide.time}</p>
+                         <p>{guide.rating}</p>
+                         <Link to={`/guides/edit/${guide._id}`} > Edit</Link>
+                         <form>
 
-                    {guide.steps && guide.steps.length > 0 && <h3>Steps</h3>}
-                    {guide.steps &&
-                         guide.steps.map(step => {
-                              return (
-                                   <div key={step._id}>
-                                        <Link to={`/steps/${step._id}`}>{step.title}</Link>
-                                   </div>
-                              );
-                         })}
+                              <button onClick={this.removeGuide}>Remove</button>
+                         </form>
 
-                    {editBlock}
 
-                    {/* <AddStep guide={guide} getGuide={this.getGuide} /> */}
-                    <br />
 
-                    <Link to="/guides">Back</Link>
+                         {guide.steps && guide.steps.length > 0 && <h3>Steps</h3>}
+                         {guide.steps &&
+                              guide.steps.map(step => {
+                                   return (
+                                        <div key={step._id}>
+                                             <Link to={`/steps/${step._id}`}>{step.title}</Link>
+                                        </div>
+                                   );
+                              })}
+
+                         {editBlock}
+
+                         <AddStep guide={guide} getGuide={this.getGuide} />
+                         <br />
+
+                         <Link to="/guides">Back</Link> </div>}
                </div>
           );
      }

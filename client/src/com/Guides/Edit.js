@@ -1,5 +1,8 @@
 import React from "react";
 import axios from "axios";
+import { editGuide } from '../../service/api'
+import { getGuide } from '../../service/api'
+
 
 class EditGuide extends React.Component {
      state = {
@@ -11,33 +14,43 @@ class EditGuide extends React.Component {
           rating: 0
      };
 
+
+     guideDetails = () => {
+          const id = this.props.match.params.id;
+          getGuide(id)
+               .then(response => {
+                    this.setState({
+                         title: response.title,
+                         description: response.description,
+                         material: response.material,
+                         time: response.time,
+                         //steps: [],
+                         rating: response.rating
+                    });
+               });
+     };
+
+
+     componentDidMount() {
+          this.guideDetails();
+     }
+
+
      handleSubmit = event => {
           event.preventDefault();
 
-          const id = this.props.project._id;
-
-          axios
-               .put(
-                    `http://localhost:5000/api/guides/${id}`,
-                    {
-                         title: this.state.title,
-                         description: this.state.description,
-                         material: this.state.material,
-                         time: this.state.time,
-                         rating: this.state.rating,
-                         steps: this.state.steps
-                    },
-               )
-               .then(() => {
-                    this.props.getDetails();
-                    this.setState({
-                         title: "",
-                         description: "",
-                         material: [],
-                         time: 0,
-                         rating: 0,
-                         steps: []
-                    });
+          const id = this.props.match.params.id;
+          const data = {
+               title: this.state.title,
+               description: this.state.description,
+               material: this.state.material,
+               time: this.state.time,
+               rating: this.state.rating,
+               steps: this.state.steps
+          }
+          editGuide(id, data)
+               .then((response) => {
+                    this.props.history.push(`/guides/${id}`)
                });
      };
 
@@ -52,7 +65,7 @@ class EditGuide extends React.Component {
           return (
                <div>
                     <hr />
-                    <h3>Edit form</h3>
+                    <h3>Edit Guide</h3>
                     <form onSubmit={this.handleSubmit}>
                          <div className="form-group">
                               <label>title:</label>
@@ -117,7 +130,7 @@ class EditGuide extends React.Component {
                          <input
                               className="btn btn-primary"
                               type="submit"
-                              value="Create Guide"
+                              value="save"
                          />
                     </form>
                </div>

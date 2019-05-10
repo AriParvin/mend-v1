@@ -1,3 +1,6 @@
+* {
+	box-sizing: border-box;
+}
 .App {
 	text-align: center;
 	list-style: none;
@@ -25,16 +28,39 @@
 }
 .nav-style {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 }
 
 .nav-style ul {
+	display: flex;
 	list-style-type: none;
+	align-items: center;
 }
 .nav-app-logo {
+	background-color: blue;
 	width: 50px;
 	height: 50px;
-	margin: 0;
+	margin: 0px;
+}
+.guide-container {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0px;
+}
+.column {
+	background-color: black;
+	border-radius: 10px;
+}
+.nav-search {
+	display: flex;
+	align-content: center;
+}
+#searchText {
+	margin: 0 10px;
+	padding: 10px;
+	width: 50vw;
+	border: 1px solid black;
+	border-radius: 10px;
 }
 
 @keyframes App-logo-spin {
@@ -44,4 +70,8 @@
 	to {
 		transform: rotate(360deg);
 	}
+}
+
+.btn-submit-guide {
+	background-color: greenyellow;
 }

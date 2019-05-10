@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { addGuide } from '../../service/api'
 
 class AddGuide extends React.Component {
      state = {
@@ -10,6 +11,7 @@ class AddGuide extends React.Component {
           steps: [],
           rating: 0
      };
+
 
      handleChange = event => {
           const name = event.target.name;
@@ -23,31 +25,30 @@ class AddGuide extends React.Component {
      handleSubmit = event => {
           event.preventDefault();
 
-          axios
-               .post(
-                    "http://localhost:5000/api/guides",
-                    {
-                         title: this.state.title,
-                         description: this.state.description,
-                         material: this.state.material,
-                         time: this.state.time,
-                         rating: this.state.rating,
-                         steps: this.state.steps
-                    },
-               )
+          const data = {
+               title: this.state.title,
+               description: this.state.description,
+               material: this.state.material,
+               time: this.state.time,
+               rating: this.state.rating,
+               steps: this.state.steps
+          }
 
-               .then(() => {
-                    // this.props.getData();
-                    this.setState({
-                         title: "",
-                         description: "",
-                         material: [],
-                         time: 0,
-                         rating: 0,
-                         steps: []
-                    })
-               });
+          addGuide(data)
+               .then((response) => {
+                    this.props.history.push('/guides')
+               })
+          // this.props.getData();
+          this.setState({
+               title: "",
+               description: "",
+               material: [],
+               time: 0,
+               rating: 0,
+               steps: []
+          })
      };
+     ;
 
      render() {
           return (
@@ -114,7 +115,7 @@ class AddGuide extends React.Component {
                               />
                          </div>
                          <input
-                              className="btn btn-primary"
+                              className="btn-submit-guide"
                               type="submit"
                               value="Create Guide"
                          />
