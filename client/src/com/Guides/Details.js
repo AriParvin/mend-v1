@@ -8,8 +8,28 @@ import AddStep from '../Steps/Add'
 
 class GuideDetails extends React.Component {
      state = {
-          guide: {}
+          guide: {},
+          likes: 0,
+          updated: false
      };
+
+     updateLikes = () => {
+          if (!this.state.updated) {
+               this.setState((prevState, props) => {
+                    return {
+                         likes: prevState.likes + 1,
+                         updated: true
+                    }
+               })
+          } else {
+               this.setState((prevState, props) => {
+                    return {
+                         likes: prevState.likes - 1,
+                         updated: false
+                    }
+               })
+          }
+     }
 
      guideDetails = () => {
           const id = this.props.match.params.id;
@@ -20,6 +40,7 @@ class GuideDetails extends React.Component {
                     });
                });
      };
+
 
      removeGuide = () => {
           const id = this.props.match.params.id;
@@ -67,6 +88,8 @@ class GuideDetails extends React.Component {
                          <p>{guide.time}</p>
                          <p>{guide.rating}</p>
                          <Link to={`/guides/edit/${guide._id}`} > Edit</Link>
+                         <button onClick={this.updateLikes}>Like</button>
+                         <p>{this.state.likes}</p>
                          <button onClick={this.removeGuide}>Remove</button>
                          {guide.steps && guide.steps.length > 0 && <h3>Steps</h3>}
                          {guide.steps &&

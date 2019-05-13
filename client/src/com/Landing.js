@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import List from './Guides/List'
 
 
 export default class Landing extends Component {
@@ -11,7 +12,7 @@ export default class Landing extends Component {
                     <section className='article-section'>What do we offer?</section>
                     <div id='landing-sec2'>
                          <h2>Cleaning and Repairing Garments</h2>
-
+                         <List />
                          <Link to='/guides'>All Guides</Link>
                     </div>
                </>)
