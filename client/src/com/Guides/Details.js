@@ -5,31 +5,14 @@ import axios from "axios";
 import { getGuide } from '../../service/api'
 import { deleteGuide } from '../../service/api'
 import AddStep from '../Steps/Add'
+import Like from './Like'
 
 class GuideDetails extends React.Component {
      state = {
           guide: {},
-          likes: 0,
-          updated: false
      };
 
-     updateLikes = () => {
-          if (!this.state.updated) {
-               this.setState((prevState, props) => {
-                    return {
-                         likes: prevState.likes + 1,
-                         updated: true
-                    }
-               })
-          } else {
-               this.setState((prevState, props) => {
-                    return {
-                         likes: prevState.likes - 1,
-                         updated: false
-                    }
-               })
-          }
-     }
+
 
      guideDetails = () => {
           const id = this.props.match.params.id;
@@ -82,15 +65,11 @@ class GuideDetails extends React.Component {
           console.log(this.state.guide)
           return (
 
-               <div>
-                    {guide && <div> <h1>{guide.title}</h1>
+               < >
+                    {guide && <div className='guide-layout'> <h1>{guide.title}</h1>
                          <p>{guide.description}</p>
-                         <p>{guide.time}</p>
-                         <p>{guide.rating}</p>
-                         <Link to={`/guides/edit/${guide._id}`} > Edit</Link>
-                         <button onClick={this.updateLikes}>Like</button>
-                         <p>{this.state.likes}</p>
-                         <button onClick={this.removeGuide}>Remove</button>
+                         {/* <Link to={`/guides/edit/${guide._id}`} > Edit</Link> */}
+                         {/* <button onClick={this.removeGuide}>Remove</button> */}
                          {guide.steps && guide.steps.length > 0 && <h3>Steps</h3>}
                          {guide.steps &&
                               guide.steps.map(step => {
@@ -100,14 +79,16 @@ class GuideDetails extends React.Component {
                                         </div>
                                    );
                               })}
+                         <section className='guide-desc-footer'>
+                              <Like /><p id='guide-time'>Time: {guide.time} minute/s</p>
+                         </section>
 
                          {editBlock}
 
                          <AddStep guide={guide} getGuide={this.getGuide} />
-                         <br />
 
                          <Link to="/guides">Back</Link> </div>}
-               </div>
+               </>
           );
      }
 }

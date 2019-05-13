@@ -21,7 +21,7 @@ export default class Searchbar extends Component {
                               onChange={this.handleInputChange}
                               type='text'
                               name='searchtext'
-                              placeholder='What do you want to fix?'>
+                              placeholder='Search for something..'>
                          </input>
                     </form>
                </>

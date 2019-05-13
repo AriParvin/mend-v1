@@ -52,7 +52,7 @@ class Login extends React.Component {
                          </div>
                          <Link to="/signup" style={{ textDecoration: "none" }}>
                               No account yet?
-              </Link>
+                         </Link>
                          <input type="submit" value="login" />
                     </form>
                </div>

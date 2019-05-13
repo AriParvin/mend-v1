@@ -49,10 +49,23 @@
 	margin: 10px;
 	border-radius: 10px;
 }
+.guide:hover {
+	background-color: lightblue;
+}
+
 .guide-title {
 	padding-top: 30px;
 }
+.guide-layout {
+	padding: 0 25vw;
+}
+.guide-layout p {
+	text-align: justify;
+}
 
+.guide-layout h1 {
+	font-size: 3em;
+}
 .nav-search {
 	display: flex;
 	align-content: center;
@@ -79,12 +92,32 @@
 }
 
 #landing-banner {
-	color: #61dafb;
+	background-image: url("../src/img/d-ng-tr-n-qu-c-104958-unsplash.jpg");
+	background-size: cover;
+	height: 400px;
+	color: white;
+	font-size: 2em;
+	padding-top: 50px;
 }
 #logo {
-	font-size: 1.5em;
+	font-size: 2em;
+	letter-spacing: 10px;
 }
 
 .article-section {
-	background-color: darkgray;
+	font-size: 1.5em;
+}
+.guide-desc-footer {
+	display: flex;
+	height: 50px;
+	justify-content: space-between;
+	align-items: flex-end;
+}
+.like-btn {
+	display: flex;
+	flex-direction: row;
+	font-size: 2em;
+}
+#guide-time {
+	line-height: normal;
 }
