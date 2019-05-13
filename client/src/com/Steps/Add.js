@@ -20,7 +20,7 @@ class AddStep extends React.Component {
           const guide = this.props.guide._id;
           axios
                .post(
-                    "http://localhost:5000/api/steps",
+                    process.env.REACT_APP_SERVER_URL + "steps",
                     {
                          title: this.state.title,
                          description: this.state.description,
