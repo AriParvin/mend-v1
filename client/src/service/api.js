@@ -6,9 +6,9 @@ const service = axios.create({
      withCredentials: true
 });
 
-const signup = (username, password) => {
+const signup = (email, username, password) => {
      return service
-          .post("/signup", { username, password })
+          .post("/signup", { email, username, password })
           .then(response => response.data);
 };
 

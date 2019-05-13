@@ -67,13 +67,7 @@ class GuideDetails extends React.Component {
                          <p>{guide.time}</p>
                          <p>{guide.rating}</p>
                          <Link to={`/guides/edit/${guide._id}`} > Edit</Link>
-                         <form>
-
-                              <button onClick={this.removeGuide}>Remove</button>
-                         </form>
-
-
-
+                         <button onClick={this.removeGuide}>Remove</button>
                          {guide.steps && guide.steps.length > 0 && <h3>Steps</h3>}
                          {guide.steps &&
                               guide.steps.map(step => {

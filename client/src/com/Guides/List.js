@@ -24,10 +24,13 @@ export default class List extends Component {
           console.log(this.state.guides)
           return (
                <>
-                    <div className='guide-container is-mobile '>
-                         {this.state.guides.map(el => (<div className='column'><Link to={`/guides/${el._id}`} >
-                              <p className="bd-notification is-primary">{el.title}</p>
-                         </Link></div>))}
+                    <div className='guide-container'>
+                         {this.state.guides.map(el =>
+                              (<Link
+                                   className='guide'
+                                   to={`/guides/${el._id}`}><p className='guide-title'>
+                                        {el.title}</p>
+                              </Link>))}
                     </div >
                     <Link to='/guides/create'>Create Guide</Link>
                </>

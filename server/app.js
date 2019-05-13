@@ -12,6 +12,7 @@ const cors = require('cors')
 
 const session = require('express-session');
 const passport = require('passport');
+require("./configs/passport");
 
 mongoose
   .connect('mongodb://localhost/mend-v1', { useNewUrlParser: true })
@@ -51,6 +52,8 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 
 // USE passport.initialize() and passport.session() HERE:
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 // default value for title local
@@ -76,5 +79,7 @@ app.use('/api', guideRoutes)
 const stepRoutes = require('./routes/step-route')
 app.use('/api', stepRoutes)
 
+const authRoutes = require('./routes/auth')
+app.use('/api', authRoutes)
 
 module.exports = app;
