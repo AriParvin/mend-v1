@@ -6,20 +6,28 @@ import { getGuide } from '../../service/api'
 import { deleteGuide } from '../../service/api'
 import AddStep from '../Steps/Add'
 import Like from './Like'
+import Steps from '../Steps/Steps'
+import CarouselBox from '../Carousel'
 
-class GuideDetails extends React.Component {
+export default class GuideDetails extends React.Component {
      state = {
           guide: {},
+          steps: []
      };
 
-
+     handleAdd = (newStep) => {
+          this.setState({
+               steps: [...this.state.steps, newStep]
+          })
+     }
 
      guideDetails = () => {
           const id = this.props.match.params.id;
           getGuide(id)
                .then(response => {
                     this.setState({
-                         guide: response
+                         guide: response,
+                         steps: response.steps
                     });
                });
      };
@@ -43,54 +51,47 @@ class GuideDetails extends React.Component {
      render() {
 
           const { guide } = this.state;
-          console.log(guide, "this is the guide details")
-          //console.log(this.props);
-
           let editBlock = <></>;
 
-          if (this.props.user && this.props.user._id === guide.owner) {
-               editBlock = (
+          const stepList = this.state.steps && this.state.steps.map((step, i) => {
+               console.log(step)
+               return (
                     <div>
-                         {/* <EditProject guide={guide} getDetails={this.getProject} /> */}
-                         {/* <button
-                              style={{ marginTop: "10px" }}
-                              className="btn btn-danger"
-                              onClick={this.removeGuide}
-                         >
-                              Delete guide
-          </button> */}
+                         <div>
+                              <Steps key={i} id={step._id} title={step.title} description={step.description} />
+                         </div>
                     </div>
                );
-          }
-          console.log(this.state.guide)
+          })
+
+
+
+
+
           return (
 
-               < >
+               <>
                     {guide && <div className='guide-layout'> <h1>{guide.title}</h1>
-                         <p>{guide.description}</p>
-                         {/* <Link to={`/guides/edit/${guide._id}`} > Edit</Link> */}
-                         {/* <button onClick={this.removeGuide}>Remove</button> */}
-                         {guide.steps && guide.steps.length > 0 && <h3>Steps</h3>}
-                         {guide.steps &&
-                              guide.steps.map(step => {
-                                   return (
-                                        <div key={step._id}>
-                                             <Link to={`/steps/${step._id}`}>{step.title}</Link>
-                                        </div>
-                                   );
-                              })}
-                         <section className='guide-desc-footer'>
-                              <Like /><p id='guide-time'>Time: {guide.time} minute/s</p>
-                         </section>
+                         <p>{guide.description}</p></div>}
 
-                         {editBlock}
+                    {this.state.steps && this.state.steps.length > 0 && <h3>Steps</h3>}
 
-                         <AddStep guide={guide} getGuide={this.getGuide} />
+                    <section className='guide-desc-footer'>
+                         <Like /> <p id='guide-time'>Time: {guide.time} minute/s</p>
+                    </section>
+                    <CarouselBox steps={this.state.steps} />
 
-                         <Link to="/guides">Back</Link> </div>}
+                    {/* {stepList} */}
+
+                    <AddStep handleAdd={this.handleAdd} guide={this.state.guide} />
+                    <Link to="/guides">Back</Link>
+
+
+
                </>
-          );
+          )
      }
+
 }
 
-export default GuideDetails;
+

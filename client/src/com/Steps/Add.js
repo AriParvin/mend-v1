@@ -1,9 +1,11 @@
 import React from "react";
 import axios from "axios";
+import { addStep } from '../../service/api'
 
 class AddStep extends React.Component {
      state = {
           title: "",
+          picture: '',
           description: "",
           material: '',
           displayForm: false
@@ -16,21 +18,20 @@ class AddStep extends React.Component {
 
      handleSubmit = event => {
           event.preventDefault();
+          const id = this.props.guide._id;
 
-          const guide = this.props.guide._id;
-          axios
-               .post(
-                    process.env.REACT_APP_SERVER_URL + "steps",
-                    {
-                         title: this.state.title,
-                         description: this.state.description,
-                         guide
-                    },
-                    { withCredentials: true }
-               )
-               .then(() => {
-                    this.props.getProject();
-                    this.setState({ title: "", description: "", displayForm: false });
+          const data = {
+               title: this.state.title,
+               // picture: this.state.picture,
+               description: this.state.description,
+               guide: id
+          }
+
+
+          addStep(id, data)
+               .then((response) => {
+                    this.props.handleAdd(response);
+                    this.setState({ title: "", picture: '', description: "", displayForm: false });
                });
      };
 
@@ -60,6 +61,16 @@ class AddStep extends React.Component {
                                              type="text"
                                         />
                                    </div>
+                                   {/* <div className="form-group">
+                                        <label>picture:</label>
+                                        <input
+                                             className="form-control"
+                                             value={this.state.picture}
+                                             onChange={this.handleChange}
+                                             name="picture"
+                                             type="text"
+                                        />
+                                   </div> */}
                                    <div className="form-group">
                                         <label>description:</label>
                                         <input

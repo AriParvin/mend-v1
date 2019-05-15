@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import Searchbar from './Searchbar'
+import NavDrop from './NavDrop'
 import { loggedin, login, logout } from '../service/api'
-
 
 export default class Navbar extends Component {
      state = {
@@ -20,22 +19,15 @@ export default class Navbar extends Component {
                <>
                     <nav className='nav-style'>
                          <ul>
-                              <li className='nav-app-logo'>
-                                   <Link to='/' id='logo' >SALVE</Link></li>
+                              <NavDrop />
 
-                              <Searchbar />
-                              {loggedin ?
-                                   <button onClick='logout'>
-                                        <Link
-                                             to="/login"
-                                             style={{ textDecoration: "none" }}>
-                                             Log out
-                                   </Link></button>
-                                   : <button><Link
+                              <div id='auth-btn'>
+                                   <Link
                                         to="/login"
                                         style={{ textDecoration: "none" }}>
-                                        Log in
-                                   </Link></button>}
+                                        Sign in
+                                   </Link>
+                              </div>
                          </ul>
                     </nav>
                </>

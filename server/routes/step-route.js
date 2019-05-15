@@ -6,21 +6,25 @@ const Guide = require('../models/guide-model');
 const router = express.Router();
 
 //create next Step
-router.post('/steps', (req, res) => {
-
+router.post('/guides/:id/steps', (req, res) => {
+     console.log(req.params.id)
      Step.create({
           title: req.body.title,
           description: req.body.description,
-          guide: req.body.guideID
+          guide: req.params.id
      })
           .then(response => {
-               Guide.findByIdAndUpdate(req.body.guideID, { $push: { steps: response._id } })
+               let step = response
+               Guide.findByIdAndUpdate(req.params.id, { $push: { steps: response._id } })
                     .then(theResponse => {
-                         res.json(theResponse)
+                         res.json(step)
+
                     })
                     .catch(err => {
                          res.json(err)
                     })
+
+
           })
           .catch(err => {
                res.json(err)

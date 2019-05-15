@@ -58,7 +58,18 @@ const editGuide = (id, data) => {
           .then(response => response.data)
 }
 
+const addStep = (id, data) => {
+     return service
+          .post(`/guides/${id}/steps`, data)
+          .then(response => response.data)
+}
+const getSteps = (id) => {
+     return service
+          .get(`/guides/${id}/steps/${id}`)
+          .then(response => response.data)
+}
 
 
 
-export { signup, login, logout, loggedin, addGuide, getGuides, getGuide, deleteGuide, editGuide };
+
+export { getSteps, addStep, signup, login, logout, loggedin, addGuide, getGuides, getGuide, deleteGuide, editGuide };

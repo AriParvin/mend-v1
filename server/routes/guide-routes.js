@@ -7,7 +7,7 @@ const router = express.Router()
 //get all guides
 router.get('/guides', (req, res) => {
      Guide.find()
-          //.populate('steps')
+          .populate('steps')
           .then(allGuides => {
                res.json(allGuides)
           })
@@ -24,7 +24,7 @@ router.get('/guides/:id', (req, res) => {
      }
      //get steps of specific guide
      Guide.findById(req.params.id)
-          //.populate('steps')
+          .populate('steps')
           .then(response => { res.status(200).json(response) })
           .catch(err => { res.json(err) })
 })

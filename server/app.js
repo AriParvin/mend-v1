@@ -14,8 +14,10 @@ const session = require('express-session');
 const passport = require('passport');
 require("./configs/passport");
 
+const mongoConnectURI = process.env.NODE_ENV === "DEV" ? process.env.MONGODB_DEV_URL : process.env.MONGODB_PROD_URL
+
 mongoose
-  .connect('mongodb://localhost/salve-v1', { useNewUrlParser: true })
+  .connect(mongoConnectURI, { useNewUrlParser: true })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
