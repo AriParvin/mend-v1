@@ -9,16 +9,18 @@ export default class Landing extends Component {
           return (
                <>
                     {/* <h3 id='landing-title'>This is a placeholder title.</h3> */}
-                    <h1 id='restora'>RESTORA</h1>
-                    <div id='landing-banner'><h1></h1></div>
+                    <img src='https://i.postimg.cc/gJpPWC14/LOGO.png' />
+                    <div id='landing-banner'>
+                    </div>
                     <div id='landing-sec2'>
-                         <section className='article-section'>What do we offer?</section>
+                         <section className='article-section'>
+                              <h1>What do we offer?</h1>
+                         </section>
                          <h2>Cleaning and Repairing of Garments</h2>
-                         <div class='landing-options'>
-                              <div id='landing-options-diy'> <Link to='./guides'>DIY Videos and Guides</Link></div>
-                              <div id='landing-options-workshop'><Link to='./workshops'>Workshops</Link></div>
+                         <div className='landing-options'>
+                              <div className='landing-options-diy'> <Link to='./diy'>DIY Videos and Guides</Link></div>
+                              <div className='landing-options-workshop'><Link to='./workshops'>Workshops</Link></div>
                          </div>
-                         <Footer />
                     </div>
                </>)
      }

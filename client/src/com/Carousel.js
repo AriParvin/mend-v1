@@ -9,14 +9,22 @@ import {
 
 const items = [
      {
-          src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/ManulZooEdinburg.jpg/1920px-ManulZooEdinburg.jpg',
-          altText: 'Slide 1',
-          caption: 'Slide 1'
+          title: 'Step 1',
+          src: 'https://i.postimg.cc/Gh9SCpcJ/Firststeptofixhole.png',
+          caption: 'Turn your sock inside out and insert the darning egg into the sock, centering it on the hole.Tighten the sock fabric around it a bit, not stretching it, but just enough that the fabric stays fairly taut.'
      },
      {
-          src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/ManulZooEdinburg.jpg/1920px-ManulZooEdinburg.jpg',
-          altText: 'Slide 2',
-          caption: 'Slide 2'
+          title: 'Step 2',
+          src: 'https://i.postimg.cc/kGGwqjdX/Secondsteptofixhole.png',
+          caption: `Run stitches horizontally across until you are about 1/2" on the other side of the hole. If there is no sock fabric to stitch to, then just make longer stitches, from one side across to the other. Continue, going back and forth, until you've reached the top of the hole.`
+
+     },
+     {
+          title: 'Step 3',
+          src: 'https://i.postimg.cc/FRDGMM8B/Thirdsteptofixhole.png',
+          caption: `Once you've reached the top of the hole, turn your sock 90 degrees, and now run stitches from the top to the bottom, which will create a weaved effect. Tie off the thread and trim any extras, turn your sock right side in and get ready for some toasty warm toes!
+`
+
      }
 ];
 
@@ -71,8 +79,10 @@ export class CarouselBox extends Component {
                          onExited={this.onExited}
                          key={item.src}
                     >
+                         <h1>{item.title}</h1>
                          <img src={item.src} alt={item.altText} />
-                         <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
+
+                         <p>{item.caption}</p>
                     </CarouselItem>
                );
           });
@@ -83,7 +93,6 @@ export class CarouselBox extends Component {
                     next={this.next}
                     previous={this.previous}
                >
-                    <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
                     {slides}
                     <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
                     <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />

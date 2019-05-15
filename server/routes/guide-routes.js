@@ -50,6 +50,7 @@ router.put('/guides/:id', (req, res) => {
 router.post('/guides', (req, res) => {
      Guide.create({
           title: req.body.title,
+          image: req.body.image,
           description: req.body.description,
           material: req.body.material,
           time: req.body.time,

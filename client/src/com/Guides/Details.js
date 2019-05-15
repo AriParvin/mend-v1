@@ -12,7 +12,8 @@ import CarouselBox from '../Carousel'
 export default class GuideDetails extends React.Component {
      state = {
           guide: {},
-          steps: []
+          steps: [],
+          material: []
      };
 
      handleAdd = (newStep) => {
@@ -63,6 +64,12 @@ export default class GuideDetails extends React.Component {
                     </div>
                );
           })
+          const materialList = this.state.material && this.state.material.map((el) => {
+               return (
+                    <>
+                         <li>{el}</li>
+                    </>)
+          })
 
 
 
@@ -72,15 +79,22 @@ export default class GuideDetails extends React.Component {
 
                <>
                     {guide && <div className='guide-layout'> <h1>{guide.title}</h1>
-                         <p>{guide.description}</p></div>}
+                         <section className='guide-desc-header'>
 
-                    {this.state.steps && this.state.steps.length > 0 && <h3>Steps</h3>}
+                              <ol>What you will need:
+                              <li>Needle</li>
+                                   <li>darning egg(substitute: light bulb)</li>
+                                   <li>Thread</li>
+                              </ol>
+                         </section></div>}
+
+                    {/* {this.state.steps && this.state.steps.length > 0 && <h3>Steps</h3>} */}
+
+                    <CarouselBox steps={this.state.steps} />
 
                     <section className='guide-desc-footer'>
                          <Like /> <p id='guide-time'>Time: {guide.time} minute/s</p>
                     </section>
-                    <CarouselBox steps={this.state.steps} />
-
                     {/* {stepList} */}
 
                     <AddStep handleAdd={this.handleAdd} guide={this.state.guide} />

@@ -28,8 +28,11 @@ export default class List extends Component {
                          {this.state.guides.map(el =>
                               (<Link
                                    className='guide'
-                                   to={`/guides/${el._id}`}><p className='guide-title'>
-                                        {el.title}</p>
+                                   to={`/guides/${el._id}`}><img src={el.image} />
+
+                                   {/* <p className='guide-title'>
+                                        {el.title}</p> */}
+
                               </Link>))}
                     </div >
                     <Link to='/guides/create'>Create Guide</Link>

@@ -23,17 +23,21 @@ export default class NavDrop extends React.Component {
                <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                     <DropdownToggle>
 
-                         <span class="line1"></span>
-                         <span class="line2"></span>
-                         <span class="line3"></span>
+                         <span className="line1"></span>
+                         <span className="line2"></span>
+                         <span className="line3"></span>
 
                     </DropdownToggle>
                     <DropdownMenu>
+                         <img src='https://i.postimg.cc/gJpPWC14/LOGO.png' />
+
+                         <DropdownItem><Link to='/'>Home</Link></DropdownItem>
+
                          <DropdownItem header>What do we offer?</DropdownItem>
-                         <DropdownItem>DIY Videos and Guides</DropdownItem>
-                         <DropdownItem>Workshops</DropdownItem>
+                         <DropdownItem><Link to='diy'>DIY Videos and Guides</Link></DropdownItem>
+                         <DropdownItem><Link to='/workshops'>Workshops</Link></DropdownItem>
                          <DropdownItem divider />
-                         <DropdownItem>Recommended Stores</DropdownItem>
+                         <DropdownItem><Link to='/store'>Recommended Stores</Link></DropdownItem>
                          <DropdownItem>About Us</DropdownItem>
                          <DropdownItem>Team</DropdownItem>
                          <DropdownItem>Contact Us</DropdownItem>

@@ -4,6 +4,7 @@ const Step = require('./step-model')
 
 const guideSchema = new Schema({
      title: String,
+     image: String,
      description: String,
      steps: [{ type: Schema.Types.ObjectId, ref: 'Step' }],
      likes: Number,

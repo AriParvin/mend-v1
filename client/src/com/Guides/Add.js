@@ -6,6 +6,7 @@ class AddGuide extends React.Component {
      state = {
           title: "",
           description: "",
+          image: '',
           material: [],
           time: 0,
           steps: [],
@@ -27,6 +28,7 @@ class AddGuide extends React.Component {
 
           const data = {
                title: this.state.title,
+               image: this.state.image,
                description: this.state.description,
                material: this.state.material,
                time: this.state.time,
@@ -41,6 +43,7 @@ class AddGuide extends React.Component {
           // this.props.getData();
           this.setState({
                title: "",
+               image: '',
                description: "",
                material: [],
                time: 0,
@@ -61,6 +64,16 @@ class AddGuide extends React.Component {
                                    value={this.state.title}
                                    onChange={this.handleChange}
                                    name="title"
+                                   type="text"
+                              />
+                         </div>
+                         <div className="form-group">
+                              <label>image:</label>
+                              <input
+                                   className="form-control"
+                                   value={this.state.image}
+                                   onChange={this.handleChange}
+                                   name="image"
                                    type="text"
                               />
                          </div>
